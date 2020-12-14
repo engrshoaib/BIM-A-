@@ -1,0 +1,92 @@
+n=int(input("Enter number of polygon points:    "))
+
+x=list(range(1,n+1))
+y=list(range(1,n+1))
+
+
+
+print("Enter x and y coordinates for polygon points ...")
+p=0
+while p<n:
+
+    x[p],y[p]=[int(x) for x in input("Enter Point : ").split()]
+    p=p+1
+
+k=0
+print("Point     x         y\n---------------------------")
+while k<n:
+    b="{:.2f}".format(x[k])
+    c="{:.2f}".format(y[k])
+    print(k+1,"     ",b,"     ",c)
+    k=k+1
+
+m=n-1
+i=0
+total_Ax=0
+total_Sx=0
+total_Sy=0
+total_Ix=0
+total_Iy=0
+total_Ixy=0
+while i<m:
+
+    Ax=0.5*((x[i+1]+x[i])*(y[i+1]-y[i]))
+    total_Ax=total_Ax+Ax
+
+    Sx=(-1/6)*((x[i+1]-x[i])*(pow(y[i+1],2)+(y[i]*y[i+1])+pow(y[i],2)))
+    total_Sx = total_Sx + Sx
+
+    Sy = (1 / 6) * ((y[i + 1] - y[i]) * (pow(x[i + 1], 2) + (x[i] * x[i + 1]) + pow(x[i], 2)))
+    total_Sy = total_Sy + Sy
+
+    Ix=(-1/12)*((x[i+1]-x[i])*((pow(y[i+1],3))+((pow(y[i+1],2))*(y[i]))+((y[i+1])*(pow(y[i],2)))+(pow(y[i],3))))
+    total_Ix = total_Ix + Ix
+
+    Iy=(1/12)*((y[i+1]-y[i])*((pow(x[i+1],3))+((pow(x[i+1],2))*(x[i]))+((x[i+1])*(pow(x[i],2)))+(pow(x[i],3))))
+    total_Iy = total_Iy + Iy
+
+    Ixy=(-1/24)*(y[i+1]-y[i])*(y[i+1]*(3*x[i+1]**2+2*x[i+1]*x[i]+x[i]**2)+y[i]*(3*x[i]**2+2*x[i+1]*x[i]+x[i+1]**2))
+    total_Ixy = total_Ixy + Ixy
+
+    i=i+1
+
+Xt=float(total_Sy)/float(total_Ax)
+td_Xt="{:.2f}".format(Xt)
+
+Yt=float(total_Sx)/float(total_Ax)
+td_Yt="{:.2f}".format(Yt)
+
+
+Ixt=total_Ix-pow(Yt,2)*total_Ax
+td_Ixt="{:.2f}".format(Ixt)
+
+Iyt=total_Iy-pow(Xt,2)*total_Ax
+td_Iyt="{:.2f}".format(Iyt)
+
+Ixyt=total_Ixy+(Xt*Yt*total_Ax)
+td_Ixyt="{:.2f}".format(Ixyt)
+print("Geometric characteristics: \n")
+
+td_total_Ax="{:.2f}".format(total_Ax)
+print("Ax:     ",td_total_Ax)
+
+td_total_Sx="{:.2f}".format(total_Sx)
+print("Sx:     ",td_total_Sx)
+
+td_total_Sy="{:.2f}".format(total_Sy)
+print("Sy:     ",td_total_Sy)
+
+td_total_Ix="{:.2f}".format(total_Ix)
+print("Ix:     ",td_total_Ix)
+
+td_total_Iy="{:.2f}".format(total_Iy)
+print("Iy:     ",td_total_Iy)
+
+td_total_Ixy="{:.2f}".format(total_Ixy)
+print("Ixy:   ",td_total_Ixy)
+
+print("Xt:     ",td_Xt)
+print("Yt:     ",td_Yt)
+print("Ixt:    ",td_Ixt)
+print("Iyt:    ",td_Iyt)
+print("Ixyt:   ",td_Ixyt)
